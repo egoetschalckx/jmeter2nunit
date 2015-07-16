@@ -4,14 +4,13 @@ trap [Exception]
 	Break;
 }
 
-$xsl = "C:\Users\Eric\Google Drive\jmeter_to_nunit.xslt"
-$xml = "C:\Users\Eric\Google Drive\mpplat_jmeter_report.xml"
+$xsl = "F:/Projects/jmeter2nunit/jmeter_to_nunit.xslt"
+$xml = "F:/Projects\jmeter2nunit/test/mpplat_jmeter_report.xml"
 $reportName = "Platform PreProd Automated Tests"
-$output = "C:\Users\Eric\Google Drive\nunit_report.xml"
+$output = "F:/Projects/jmeter2nunit/nunit_report.xml"
 
 $xslt = New-Object System.Xml.Xsl.XslCompiledTransform;
 $xslt.Load($xsl);
-#$xslt.Transform($xml, $output);
 
 $date = Get-Date
 $xslArgList = New-Object System.Xml.Xsl.XsltArgumentList;

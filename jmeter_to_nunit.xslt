@@ -1,10 +1,10 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-	<xsl:output method="xml" indent="yes" encoding="UTF-8" doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN" />
+	<xsl:output method="xml" indent="no" encoding="UTF-8" doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN" />
 	<xsl:param name="date"/>
 	<xsl:param name="time"/>
 	<xsl:param name="report_name"/>
-	<xsl:param name="num_failures" select="count(//httpSample/assertionResult[failure = 'true']) + count(//sample/assertionResult[failure = 'true'])" />
-	<xsl:param name="num_errors" select="count(//httpSample/assertionResult[error = 'true']) + count(//sample/assertionResult[error = 'true'])"/>
+	<xsl:param name="num_failures" select="count(//assertionResult[failure = 'true'])" />
+	<xsl:param name="num_errors" select="count(//assertionResult[error = 'true'])"/>
 
 	<xsl:template match="/">
 		<test-results not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0">
@@ -89,39 +89,23 @@
 				</xsl:otherwise>
 			</xsl:choose>
 
+			<xsl:apply-templates select="child::assertionResult[failure = 'true']"/>
+
 		</test-case>
 
-		<!--<tr>
-			<td>
-				<xsl:value-of select="@ts"/>
-			</td>
-			<td>
-				<xsl:value-of select="@lb"/>
-			</td>
-			<td>
-				<xsl:value-of select="@lt"/>
-			</td>
-			<td>
-				<xsl:value-of select="@rm"/>
-			</td>
-			<td>
-				<xsl:value-of select="@rc"/>
-			</td>
-			<td>
-				<xsl:value-of select="@s"/>
-			</td>
-			<td>
-				<xsl:value-of select="./assertionResult/name"/>
-			</td>
-			<td>
-				<xsl:value-of select="./assertionResult/failure"/>
-			</td>
-			<td>
-				<xsl:value-of select="./assertionResult/error"/>
-			</td>
-		</tr>-->
-		<!-- This is where nested support would go -->
-		<!--<xsl:apply-templates/>-->
+	</xsl:template>
+
+	<xsl:template match="assertionResult[failure = 'true']">
+		<failure>
+			<message>
+				HTTP Response Code:<br/>
+				<xsl:value-of select="./../@rc"/><br/>
+				JMeter Response Message:<br/>
+				<xsl:value-of select="./../@rm"/><br/>
+				JMeter Failure Message:<br/>
+				<xsl:value-of select="./failureMessage"/><br/>
+			</message>
+		</failure>
 	</xsl:template>
 
 </xsl:stylesheet>
