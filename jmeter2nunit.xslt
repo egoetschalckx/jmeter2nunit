@@ -64,7 +64,7 @@
 			</xsl:attribute>
 
 			<xsl:attribute name="time">
-				<xsl:value-of select="@lt"/>
+				<xsl:value-of select="@lt * 0.001"/>
 			</xsl:attribute>
 
 			<xsl:attribute name="asserts">
