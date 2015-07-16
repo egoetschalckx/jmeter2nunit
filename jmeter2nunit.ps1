@@ -12,11 +12,6 @@ trap [Exception]
 	Break;
 }
 
-$xsl = "F:/Projects/jmeter2nunit/jmeter_to_nunit.xslt"
-$xml = "F:/Projects\jmeter2nunit/test/mpts_jmeter_report.xml"
-$reportName = "Platform PreProd Automated Tests"
-$output = "F:/Projects/jmeter2nunit/nunit_report2.xml"
-
 $xslt = New-Object System.Xml.Xsl.XslCompiledTransform;
 $xslt.Load($xsl);
 
