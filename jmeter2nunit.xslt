@@ -28,7 +28,7 @@
 				<xsl:value-of select="$num_errors"/>
 			</xsl:attribute>
 
-			<test-suite type="TestFixture" name="AdditionFeature" description="Addition" executed="True" result="Failure" success="False" time="0.724" >
+			<test-suite type="TestFixture" name="Tests" description="" executed="True" result="Failure" success="False" time="0.724" >
 				<xsl:attribute name="asserts">
 					<xsl:value-of select="$num_failures"/>
 				</xsl:attribute>
